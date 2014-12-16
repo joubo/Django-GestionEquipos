@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+<html>
+    <head>  
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+        <title>Liga de Futbol</title>
+    </head>
+
+    <body>
+
+    	 <div id="content-container">    
+
+            {% block NavigationLeft %}
+                <ul>
+                    <li><a href='/gestion_equipos/equipo/nuevoJugadorEnEquipo/{{equipo.id}}'>Insertar Jugador</a></li>
+                    <li><a href='/gestion_equipos/modificarEquipo/{{equipo.id}}'>Modificar Equipo</a></li>
+                    <li><a href='/gestion_equipos/eliminarEquipo/{{equipo.id}}'>Eliminar Equipo</a></li>
+                </ul>
+            {% endblock %}
+
+            <div id="content">
+            {% block Contents %}
+            <h2>Detalles de: {{equipo.nombre}}</h2> 
+				{% if equipo %}
+				<ul>
+                    <li>Anyo Fundacion: {{equipo.fundacion}}</li>
+					<li>Nombre: {{equipo.nombre}}</li>
+                    <li>Ciudad: {{equipo.ciudad}}</li>
+                    <li>Entrenador: {{equipo.entrenador}}</li>
+                    <li>Historia: {{equipo.historia}}</li>
+                    <li>Edad Media: {{media}}</li>
+                    <li>Jugadores:</li>
+                    <ul>
+                        {% if jugadores %}
+                            {% for jugador in jugadores %}
+                            <li><a href='/gestion_equipos/jugador/{{jugador.id}}'>{{jugador.nombre}}</a>
+                                <!-- <a href='/gestion_equipos/bajaJugador/{{jugador.id}}'>Dar de baja</a> -->
+                            </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+				</ul>
+				{% endif %}
+    		{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

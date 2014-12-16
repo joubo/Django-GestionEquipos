@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Crear cuenta{% endblock %}
+
+{% block Contents %}
+  <h1>Crear una cuenta nueva</h1>
+  <form action="." method="post">{% csrf_token %}
+    {% if form.error_dict %}
+      <p class="error">Please correct the errors below.</p>
+    {% endif %}
+
+    {% if form.username.errors %}
+      {{ form.username.html_error_list }}
+    {% endif %}
+    <label for="id_username"><br>Nombre:</label> {{ form.username }}
+
+    {% if form.password1.errors %}
+      {{ form.password1.html_error_list }}
+    {% endif %}
+    <label for="id_password1"><br>Clave de acceso: {{ form.password1 }}
+
+    {% if form.password2.errors %}
+      {{ form.password2.html_error_list }}
+    {% endif %}
+    <label for="id_password2"><br>Repita clave de acceso: {{ form.password2 }}
+
+    <input type="submit" value="Crear" />
+  </label>
+{% endblock %}

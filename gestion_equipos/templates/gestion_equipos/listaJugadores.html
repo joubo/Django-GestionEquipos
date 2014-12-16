@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+<html>
+    <head>  
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+        <title>Liga de Futbol</title>
+    </head>
+
+    <body>
+    	 <div id="content-container"> 
+            {% block NavigationLeft %}
+                <ul>
+                    <li><a href="/gestion_equipos/nuevoJugador/">Insertar Jugador</a></li>
+                </ul>
+            {% endblock %}     	
+            
+            <div id="content">
+
+            {% block Contents %}
+                <h2>Listado de Jugadores</h2> 
+          
+				{% for jugador in listaJugadores %}
+				<ul>
+					<li><a href='/gestion_equipos/jugador/{{jugador.id}}'>{{jugador.nombre}}</a>
+                        <a href='/gestion_equipos/eliminarJugador/{{jugador.pk}}'>eliminar</a>
+                    </li>
+				</ul>
+				{% endfor %}
+    		{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

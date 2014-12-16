@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+<html>
+    <head>  
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+        <title>Liga de Futbol</title>
+    </head>
+
+    <body>
+    	 <div id="content-container"> 
+            {% block NavigationLeft %}
+                <ul>
+                    <li><a href='/gestion_equipos/bajaJugador/{{jugador.id}}'>Eliminar Equipo</a></li>
+                    <li><a href='/gestion_equipos/modificarJugador/{{jugador.id}}'>Modificar Jugador</a></li>
+                    <li><a href='/gestion_equipos/eliminarJugador/{{jugador.id}}'>Eliminar Jugador</a></li>
+                </ul>
+            {% endblock %}
+
+            <div id="content">
+            {% block Contents %}
+                <h2>Detalles de: {{jugador.nombre}}</h2> 
+				{% if jugador %}
+				<ul>
+                    <li>Nombre: {{jugador.nombre}}</li>
+					<li>Fecha Nacimiento: {{jugador.fecha_nacimiento}}</li>
+                    <li>Lugar Nacimiento: {{jugador.lugar_nacimiento}}</li>
+                    <li>Edad: {{jugador.edad}}</li>
+                    <li>Equipo:
+
+                        {% if jugador.equipo == None %}
+                            Ninguno
+                        {% else %}
+                            <a href='/gestion_equipos/equipo/{{jugador.equipo.id}}'>{{jugador.equipo}}</a>
+                        {% endif %}
+                    </li>
+                    <li>Posicion: {{jugador.posicion}}</li>
+                    <li>Historial: {{jugador.historial}}</li>
+				{% endif %}
+    		{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+{% load staticfiles %}
+<html>
+    <head>  
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+        <title>Liga de Futbol</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>{% block Header %}LIGA DE FUTBOL{% endblock %}</h1>
+            <div id="login">
+
+                {% if user.is_authenticated %}
+                    <a>{{user.username}}</a>
+                    <a href="/gestion_equipos/logout">Cerrar sesion</a>
+                {% else %}
+                    <a href="/gestion_equipos/login">Iniciar sesion</a>
+                    <a> o </a>
+                    <a href="/gestion_equipos/register">registrarse</a>
+                {% endif %}
+
+            </div>
+        </header>
+  
+        <nav>
+        	{% block NavigationTop %}
+            <ul>
+                <li><a href="/gestion_equipos/">Inicio</a></li>
+                <li><a href="/gestion_equipos/listaEquipos/">Equipos</a></li>
+                <li><a href="/gestion_equipos/listaJugadores/">Jugadores</a></li>
+            </ul>
+            {% endblock %}
+        </nav>
+ 
+        <div id="content-container">        	
+            <section id="left-navigation">
+            	{% block NavigationLeft %}
+                <ul>
+                  
+              	</ul>
+                {% endblock %}
+            </section>            
+                        
+            <div id="content">
+            {% block Contents %}
+                <h2>Bienvenido a la Liga de Futbol</h2> 				
+    		{% endblock %}
+            </div>                 
+        </div>
+
+        <footer>
+        	{% block Footer %}
+           		&copy Jordi Bordoy Nieto
+            {% endblock %}
+        </footer>
+        
+  </body>
+
+  </html> 
